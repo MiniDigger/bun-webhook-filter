@@ -24,12 +24,8 @@ export default {
 
 function shouldForward(eventType: string, event: WebhookEvent): string | null {
     let reason: string | null = null;
-    if (isPush(eventType, event)) {
+    if (isPush(eventType, event) || isCreate(eventType, event)) {
         reason = validSender(event.sender);
-        if (reason) return reason;
-    } else if (isCreate(eventType, event)) {
-        reason = validSender(event.sender)
-        if (reason) return reason;
     }
     return reason;
 }
